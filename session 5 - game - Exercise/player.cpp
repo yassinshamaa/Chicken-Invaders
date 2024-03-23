@@ -4,8 +4,11 @@
 #include <QGraphicsScene>
 #include <QDebug>
 #include "enemy.h"
-Player::Player() {
 
+int Player::Score = 0;
+Player::Player() : QGraphicsPixmapItem() {
+    QPixmap pixmap1(":/new/prefix1/ship.png");
+    setPixmap(pixmap1);
 }
 
 void Player::keyPressEvent(QKeyEvent *event)

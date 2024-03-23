@@ -4,9 +4,11 @@
 #include <QTimer>
 #include <QDebug>
 
-Enemy::Enemy() {
+Enemy::Enemy() : QGraphicsPixmapItem() {
         // *******  Setting the size of the enemy ********
-    setRect(0,0,100,100);
+    QPixmap pixmap2(":/new/prefix1/ship.png");
+    QPixmap scaledPixmap = pixmap2.scaled(100, 100, Qt::KeepAspectRatio);
+    setPixmap(scaledPixmap);
 
         // *******  Setting the postion of the enemy within the view dimensions ********
     int random_number = rand() % 700;

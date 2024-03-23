@@ -4,10 +4,12 @@
 #include <QList>
 #include <enemy.h>
 #include <player.h>
-Bullet::Bullet():QObject(), QGraphicsRectItem() {
+Bullet::Bullet():QObject(), QGraphicsPixmapItem() {
 
         // *******  Setting the bullets' size ********
-    setRect(0,0,10,50);
+    QPixmap pixmap3(":/new/prefix1/red_laser.png");
+    QPixmap scaledPixmap = pixmap3.scaled(10, 50, Qt::KeepAspectRatio);
+    setPixmap(scaledPixmap);
 
         // *******  Generating the Bullets automatically ********
     QTimer * timer = new QTimer();
@@ -20,7 +22,7 @@ Bullet::Bullet():QObject(), QGraphicsRectItem() {
 void Bullet:: move()
 {
     setPos(x(), y()-10);
-    if (pos().y() + rect().height() < 0) {
+    if (pos().y() + pixmap().height() < 0) {
         scene() -> removeItem(this);
         delete this;
     }
@@ -29,6 +31,7 @@ void Bullet:: move()
         if (typeid(*(colliding_items[i])) == typeid(Enemy)) {
             scene() -> removeItem(colliding_items[i]);
             scene() -> removeItem(this);
+            Player::Score += 1;
             delete colliding_items[i];
             delete this;
             return;

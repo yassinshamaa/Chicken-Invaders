@@ -15,16 +15,20 @@ int main(int argc, char *argv[])
     // *******  Create the View ********
     QGraphicsView *view =new QGraphicsView();
     view->setFixedSize(800, 600);
-
     // ******* Create the Scene ********
     QGraphicsScene *Scene = new QGraphicsScene();
     Scene->setSceneRect(0, 0, 800, 600);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    QGraphicsTextItem * score = new QGraphicsTextItem;
+    score-> setFont(QFont("times", 16));
+    score-> setDefaultTextColor(Qt::white);
+    score->setPlainText("Score: " + QString::number(Player::Score));
+    score -> setPos(700, 10);
+    Scene->addItem(score);
     // *******  Create the Player ********
     Player * player = new Player;
-    player -> setRect(0, 0, 100, 100);
-    player -> setPos(view -> width()/2, view -> height() - player -> rect().height());
+    player -> setPos(view -> width()/2, view -> height() - player -> pixmap().height());
     Scene->addItem(player);
     // *******  Setting the foucs to the Player ********
     player -> setFlag(QGraphicsItem::ItemIsFocusable);
