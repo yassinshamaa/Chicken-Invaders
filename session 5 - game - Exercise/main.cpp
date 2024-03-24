@@ -8,6 +8,9 @@
 #include <QDebug>
 #include <QBrush>
 
+
+
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -20,12 +23,7 @@ int main(int argc, char *argv[])
     Scene->setSceneRect(0, 0, 800, 600);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    QGraphicsTextItem * score = new QGraphicsTextItem;
-    score-> setFont(QFont("times", 16));
-    score-> setDefaultTextColor(Qt::white);
-    score->setPlainText("Score: " + QString::number(Player::Score));
-    score -> setPos(700, 10);
-    Scene->addItem(score);
+    Scene->addItem(Player::score);
     // *******  Create the Player ********
     Player * player = new Player;
     player -> setPos(view -> width()/2, view -> height() - player -> pixmap().height());
@@ -48,3 +46,5 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+
+

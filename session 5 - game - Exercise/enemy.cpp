@@ -6,7 +6,7 @@
 
 Enemy::Enemy() : QGraphicsPixmapItem() {
         // *******  Setting the size of the enemy ********
-    QPixmap pixmap2(":/new/prefix1/ship.png");
+    QPixmap pixmap2(":/new/prefix1/Chicken.png");
     QPixmap scaledPixmap = pixmap2.scaled(100, 100, Qt::KeepAspectRatio);
     setPixmap(scaledPixmap);
 
