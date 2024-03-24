@@ -6,15 +6,11 @@
 #include "enemy.h"
 
 int Player::Score = 0;
+
 Player::Player() : QGraphicsPixmapItem() {
     QPixmap pixmap1(":/new/prefix1/ship.png");
     setPixmap(pixmap1);
-    Player::score = new QGraphicsTextItem;
-    Player::score->setFont(QFont("times", 16));
-    Player::score->setDefaultTextColor(Qt::white);
-    Player::score->setPlainText("Score: " + QString::number(Score));
-    Player::score->setPos(700, 10);
-
+    HealthCount = 3;
 }
 
 void Player::keyPressEvent(QKeyEvent *event)
@@ -42,14 +38,13 @@ void Player::keyPressEvent(QKeyEvent *event)
 
 
 }
- // CreateEnemy function used to create the eneimes
-void Player::createEnemy()
-{ Enemy* enemy = new Enemy();
-  scene()->addItem(enemy);
 
+
+
+ // CreateEnemy function used to create the eneimes
+void Player::createEnemy() {
+    Enemy* enemy = new Enemy();
+    scene()->addItem(enemy);
 }
-void Player::updateScoreDisplay() {
-    Player::Score++;
-    Player::score->setPlainText("Score: " + QString::number(Player::Score));
-}
+
 

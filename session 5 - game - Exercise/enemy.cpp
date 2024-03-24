@@ -1,14 +1,18 @@
 #include "enemy.h"
+#include "player.h"
 #include <QGraphicsScene>
 #include <stdlib.h> // rand() -> to generate really large integer
 #include <QTimer>
 #include <QDebug>
+#include <health.h>
+
 
 Enemy::Enemy() : QGraphicsPixmapItem() {
         // *******  Setting the size of the enemy ********
-    QPixmap pixmap2(":/new/prefix1/Chicken.png");
-    QPixmap scaledPixmap = pixmap2.scaled(100, 100, Qt::KeepAspectRatio);
-    setPixmap(scaledPixmap);
+    QPixmap pixmap2(":/new/prefix1/chicky.png");
+        QPixmap scaledPixmap = pixmap2.scaled(100, 100, Qt::KeepAspectRatio);
+        setPixmap(scaledPixmap);
+
 
         // *******  Setting the postion of the enemy within the view dimensions ********
     int random_number = rand() % 700;
@@ -20,14 +24,17 @@ Enemy::Enemy() : QGraphicsPixmapItem() {
     timer->start(50);
     qDebug() << "inside constructor";
 
+
+
 }
 // Function move: move the enemy downwards untill the end of the scene then remove it and delete it
-void Enemy:: move()
-{
-    setPos(x(),y()+5);
-        if(y()+100>800)
-    {
+
+
+void Enemy::move() {
+    setPos(x(), y() + 5);
+    if (y() + pixmap().height() > 600) {
         scene()->removeItem(this);
-            delete this;
+
+        delete this;
     }
 }

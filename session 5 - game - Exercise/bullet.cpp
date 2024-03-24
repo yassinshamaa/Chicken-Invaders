@@ -31,7 +31,7 @@ void Bullet:: move()
         if (typeid(*(colliding_items[i])) == typeid(Enemy)) {
             scene() -> removeItem(colliding_items[i]);
             scene() -> removeItem(this);
-            Player::updateScoreDisplay();
+            Player::Score += 1;
             delete colliding_items[i];
             delete this;
             return;
