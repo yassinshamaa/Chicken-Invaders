@@ -4,6 +4,8 @@
 #include <QGraphicsScene>
 #include <QDebug>
 #include "enemy.h"
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 int Player::Score = 0;
 
@@ -12,6 +14,8 @@ Player::Player() : QGraphicsPixmapItem() {
     setPixmap(pixmap1);
     HealthCount = 3;
 }
+
+
 
 void Player::keyPressEvent(QKeyEvent *event)
 {
@@ -30,6 +34,8 @@ void Player::keyPressEvent(QKeyEvent *event)
     }
     else if(event->key()== Qt::Key_Space)
     {
+
+
         Bullet * bullet = new Bullet();
         bullet->setPos(x()+30,y());
         scene()->addItem(bullet);

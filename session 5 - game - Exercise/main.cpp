@@ -14,6 +14,8 @@
 #include"health.h"
 #include <health.h>
 #include <enemy.h>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 
 int main(int argc, char *argv[])

@@ -4,12 +4,20 @@
 #include <QList>
 #include <enemy.h>
 #include <player.h>
+
 Bullet::Bullet():QObject(), QGraphicsPixmapItem() {
 
         // *******  Setting the bullets' size ********
     QPixmap pixmap3(":/new/prefix1/red_laser.png");
     QPixmap scaledPixmap = pixmap3.scaled(10, 50, Qt::KeepAspectRatio);
     setPixmap(scaledPixmap);
+    QString bs = ":/new/prefix1/bulletsound1.mp3";
+    QAudioOutput* SoundOutput = new QAudioOutput();
+    SoundOutput->setVolume(100);
+    QMediaPlayer* Sound = new QMediaPlayer();
+    Sound->setAudioOutput(SoundOutput);
+    Sound->setSource(QUrl(bs));
+    Sound->play();
 
         // *******  Generating the Bullets automatically ********
     QTimer * timer = new QTimer();

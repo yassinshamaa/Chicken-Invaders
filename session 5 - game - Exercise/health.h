@@ -10,10 +10,10 @@ public:
 
 
     Health(QGraphicsItem* parent = nullptr) : QGraphicsPixmapItem(parent) {
-        QPixmap pixmap4(":/new/prefix1/heart_icon.png");
-        QPixmap scaledPixmap = pixmap4.scaled(100, 100, Qt::KeepAspectRatio);
-        setPixmap(scaledPixmap);
-         }
+    QPixmap pixmap4(":/new/prefix1/heart_icon.png");
+    QPixmap scaledPixmap = pixmap4.scaled(100, 100, Qt::KeepAspectRatio);
+    setPixmap(scaledPixmap);
+    }
 
 };
 
