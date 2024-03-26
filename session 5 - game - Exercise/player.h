@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QGraphicsPixmapItem>
 #include <enemy.h>
+#include<QMediaPlayer>
 
 class Player: public QObject, public QGraphicsPixmapItem
 {
@@ -12,20 +13,18 @@ public:
     Player();
     void keyPressEvent(QKeyEvent * event);
 
-    static int Score;
-    int HealthCount;
+    int Score = 0;
+    int healthCount = 3;
 
+    QMediaPlayer* bulletsound;
+
+signals:
+    void scoreChanged(int newScore);
+    void healthChanged(int newHealth);
 
 public slots:
     void createEnemy();
-    void decrementHealth(){
-        HealthCount--;
-    }
-
-
-
-
-
+    void decrementHealth();
 };
 
 #endif // PLAYER_H

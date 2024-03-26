@@ -6,13 +6,24 @@
 #include "enemy.h"
 #include <QMediaPlayer>
 #include <QAudioOutput>
+#include <QApplication>
 
-int Player::Score = 0;
+
 
 Player::Player() : QGraphicsPixmapItem() {
     QPixmap pixmap1(":/new/prefix1/ship.png");
     setPixmap(pixmap1);
-    HealthCount = 3;
+    Score = 0;
+    healthCount = 3;
+
+    QAudioOutput* SoundOutput = new QAudioOutput();
+    SoundOutput->setVolume(100);
+    bulletsound = new QMediaPlayer();
+    bulletsound->setAudioOutput(SoundOutput);
+    bulletsound->setSource(QUrl("qrc:/new/prefix1/bulletsound2.mp3"));
+
+
+
 }
 
 
@@ -36,9 +47,21 @@ void Player::keyPressEvent(QKeyEvent *event)
     {
 
 
-        Bullet * bullet = new Bullet();
-        bullet->setPos(x()+30,y());
+        Bullet* bullet = new Bullet();
+        bullet->setPos(x() + 30, y());
         scene()->addItem(bullet);
+
+        if(bulletsound->playbackState() == QMediaPlayer::PlayingState){
+            bulletsound->setPosition(0);
+        }else{
+            bulletsound->play();
+
+        }
+
+        connect(bullet, &Bullet::enemyHit, this, [this](){
+            ++Score;
+            emit scoreChanged(Score);
+        });
 
     }
 
@@ -46,11 +69,21 @@ void Player::keyPressEvent(QKeyEvent *event)
 }
 
 
+void Player::decrementHealth() {
+    --healthCount;
+    if (healthCount == 0) {
+        QApplication::exit();
+    }
+    emit healthChanged(healthCount);
+}
+
 
  // CreateEnemy function used to create the eneimes
 void Player::createEnemy() {
     Enemy* enemy = new Enemy();
     scene()->addItem(enemy);
+    QObject::connect(enemy, &Enemy::enemyBottom, this, &Player::decrementHealth);
+
 }
 
 

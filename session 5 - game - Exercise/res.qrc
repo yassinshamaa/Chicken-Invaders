@@ -5,5 +5,7 @@
         <file>chicky.png</file>
         <file>heart_icon.png</file>
         <file>bulletsound1.mp3</file>
+        <file>bulletsound2.mp3</file>
+        <file>squeaky-toy-1-6059.mp3</file>
     </qresource>
 </RCC>

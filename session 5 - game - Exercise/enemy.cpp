@@ -1,10 +1,12 @@
 #include "enemy.h"
 #include "player.h"
 #include <QGraphicsScene>
-#include <stdlib.h> // rand() -> to generate really large integer
+#include <stdlib.h>
 #include <QTimer>
 #include <QDebug>
 #include <health.h>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 
 Enemy::Enemy() : QGraphicsPixmapItem() {
@@ -12,6 +14,7 @@ Enemy::Enemy() : QGraphicsPixmapItem() {
     QPixmap pixmap2(":/new/prefix1/chicky.png");
         QPixmap scaledPixmap = pixmap2.scaled(100, 100, Qt::KeepAspectRatio);
         setPixmap(scaledPixmap);
+
 
 
         // *******  Setting the postion of the enemy within the view dimensions ********
@@ -32,9 +35,15 @@ Enemy::Enemy() : QGraphicsPixmapItem() {
 
 void Enemy::move() {
     setPos(x(), y() + 5);
+
     if (y() + pixmap().height() > 600) {
         scene()->removeItem(this);
+        emit enemyBottom();
+
 
         delete this;
+        return;
     }
+
+
 }

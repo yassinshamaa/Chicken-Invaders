@@ -13,6 +13,11 @@ class Bullet: public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     Bullet();
+    QMediaPlayer* chickendie;
+
+
+    signals:
+        void enemyHit();
 
 
 public slots:
